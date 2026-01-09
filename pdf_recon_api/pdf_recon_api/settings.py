@@ -7,14 +7,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 SECRET_KEY = 'django-insecure-u0n+p-$vy%4r7v--ay3^_icf50e=l(zq_y*k4x(#q3e)$e*_b)'
 DEBUG = True
-# ALLOWED_HOSTS = [
-#     host.strip()
-#     for host in os.getenv(
-#         "DJANGO_ALLOWED_HOSTS", "localhost,127.0.0.1,[::1]"
-#     ).split(",")
-#     if host.strip()
-# ]
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = [
+    host.strip()
+    for host in os.getenv(
+        "DJANGO_ALLOWED_HOSTS",
+        "localhost,127.0.0.1,[::1],clear-elmira-123test-db6599b3.koyeb.app",
+    ).split(",")
+    if host.strip()
+]
 # Application definition
 INSTALLED_APPS = [
     'django.contrib.admin',
