@@ -2,6 +2,7 @@ from django.db import models
 
 class ReconciliationRecord(models.Model):
     processed_at = models.DateTimeField(auto_now_add=True)
+    client_name = models.CharField(max_length=255, default="client")
     min_date = models.DateField()
     max_date = models.DateField()
     total_transactions = models.IntegerField(default=0)
@@ -9,4 +10,7 @@ class ReconciliationRecord(models.Model):
     hotel_filename = models.CharField(max_length=255, blank=True, null=True)
 
     def __str__(self):
-        return f"Recon {self.min_date} to {self.max_date} ({self.total_transactions} txns)"
+        return (
+            f"Recon {self.client_name} {self.min_date} to {self.max_date} "
+            f"({self.total_transactions} txns)"
+        )

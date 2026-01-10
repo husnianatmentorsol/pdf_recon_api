@@ -507,9 +507,10 @@ class ReconciliationAPIView(APIView):
                 txn_count = len(bank)
 
                 if ReconciliationRecord.objects.filter(
-                    min_date=min_date, 
-                    max_date=max_date, 
-                    total_transactions=txn_count
+                    client_name=client_name,
+                    min_date=min_date,
+                    max_date=max_date,
+                    total_transactions=txn_count,
                 ).exists():
                      return Response(
                         {"error": f"Transactions from {min_date} to {max_date} ({txn_count} entries) have already been reconciled."},
@@ -1064,11 +1065,12 @@ class ReconciliationAPIView(APIView):
                 max_dt = bank["DT"].max()
                 if not pd.isna(min_dt) and not pd.isna(max_dt):
                     ReconciliationRecord.objects.create(
+                        client_name=client_name,
                         min_date=min_dt.date(),
                         max_date=max_dt.date(),
                         total_transactions=len(bank),
                         bank_filename=bank_file_obj.name,
-                        hotel_filename=hotel_file_obj.name
+                        hotel_filename=hotel_file_obj.name,
                     )
              except Exception as e:
                  print(f"Failed to save reconciliation record: {e}")
